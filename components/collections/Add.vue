@@ -1,10 +1,10 @@
 <template>
   <TransitionRoot as="template" :show="open">
-    <Dialog as="div" class="relative z-10" @close="open = false">
+    <Dialog as="div" class="relative z-10" @close="open = false" Edit="false">
       <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
       </TransitionChild>
-
+   hello
       <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
           <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200" leave-from="opacity-100 translate-y-0 sm:scale-100" leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
@@ -13,7 +13,7 @@
                 <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
                   <CheckIcon class="h-6 w-6 text-green-600" aria-hidden="true" />
                 </div>
-                <lable>Field name</lable>
+                <lable>Field name...</lable>
                 <input open="true"
         v-model="field_name"
         property="value"
@@ -85,27 +85,22 @@ const type = ref("");
 const description = ref("");
 const placeholder = ref("");
 
-const open = ref(true);
+const open= ref(true);
 
 //sending body to the emit
 const postData = async () => {
  
   let body = {
-    
-    project_id: "12345",
     name: field_name.value,
-  entity: "CONTACTS",
-  type_data: {
-    is_required: 1,
-    show_in_filter: 1,
-    length: 100,
-    description: "hello",
-    placeholder: "enter your age"
-  },
-  description: description.value,
-    placeholder: placeholder.value,
-  type: type.value,
-  role_id: "string"
+    type: type.value,
+    entity: "CONTACTS",
+    type_data: {
+      is_required: 1,
+      show_in_filter: 1,
+      length: 100,
+      description: description.value,
+      placeholder: placeholder.value,
+    },
   };
   emit("postDatabody", body);
   open.value=false;

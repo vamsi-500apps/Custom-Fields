@@ -63,22 +63,23 @@
                 </td>
                
                 <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                  {{ item.description }}
+                  {{ item.type_data.description }}
                 </td>
                
                 <td
                   class="whitespace-nowrap px-2 py-2 text-center text-sm text-gray-500"
                 >
-                  {{ item.placeholder }}
+                  {{ item.type_data.placeholder }}
                 </td>
                 <td
                   class="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
                 ></td>
-                <td class="py-3 pr-6 whitespace-nowrap">
-                <CollectionFieldEdit @edit="editField(field,index)"/>
+                <td class="py-3 pr-6 whitespace-nowrap text-sm ">
+                <button  @click="editData(item,index)">edit</button>
               </td>
-              <td class="py-3 pr-6 whitespace-nowrap">
-                <CollectionFieldDelete @delete="deleteField(field)"/>
+               
+              <td class="py-3 pr-6 whitespace-nowrap text-sm ">
+                <button  @click="deleteData(item,index)">delete</button>
               </td>
               </tr>
             </tbody>
@@ -88,20 +89,30 @@
     </div>
   </div>
 </template>
-
-
 <script setup lang="ts">
 import { defineProps, defineEmits } from "vue";
+import { TrashIcon } from "@heroicons/vue/24/outline";
 
 const props = defineProps({
   CustomData: {
     type: Array,
   },
+
 });
-const emit = defineEmits(["slideout"]);
+const emit = defineEmits(["slideout","deleteDataItem","editDataItem",]);
 
 //open sidebar for Add
 const AddCustomField = () => {
-  emit("slideout");
+  emit("slideout",);
+  
 };
+const deleteData = (item: any, index: any) => {
+  emit("deleteDataItem", item,index);
+};
+//Open Slidebar for Edit
+const editData=(item:any,index:any)=>{
+  console.log("item",item)
+  emit("editDataItem",item);
+
+}
 </script>
